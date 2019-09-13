@@ -8,8 +8,9 @@ use function sprintf;
 
 class BlacklistDetectedException extends Exception
 {
-    public function __construct(string $type, string $source)
+    public function __construct(string $type = null, string $source = null)
     {
+        $type    = empty($type) ? 'null' : $type;
         $message = sprintf('Checked %s %s was found in our database.', Str::lower($type), Str::lower($source));
 
         parent::__construct($message, 423);

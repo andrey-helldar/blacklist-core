@@ -12,16 +12,17 @@ class Types
         return \array_keys(Rules::AVAILABLE);
     }
 
-    public static function getDivided(string $divider = ', ')
+    public static function getDivided(string $divider = ', ', string $last_divider = ' or ')
     {
-        return
-            \implode($divider,
-                \array_map(
-                    function ($item) {
-                        return \sprintf('"%s"', Str::lower($item));
-                    }, self::get()
-                )
-            );
+        $arr = \array_map(
+            function ($item) {
+                return Str::lower($item);
+            }, self::get()
+        );
+
+        $last = \array_pop($arr);
+
+        return \implode($divider, $arr) . $last_divider . $last;
     }
 
     /**
