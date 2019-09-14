@@ -23,8 +23,8 @@ class Rules
         'value.url' => 'The :attribute is not a valid URL.',
     ];
 
-    public static function get(string $type = null)
-    : array {
+    public static function get(string $type = null): array
+    {
         if (is_null($type)) {
             throw new UnknownTypeException($type);
         }
