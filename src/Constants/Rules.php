@@ -17,7 +17,7 @@ class Rules
     const DEFAULT   = ['required', 'string', 'max:255'];
 
     const MESSAGES  = [
-        'source.url' => 'The :attribute is not a valid URL.',
+        'value.url' => 'The :attribute is not a valid URL.',
     ];
 
     public static function get(string $type): array
