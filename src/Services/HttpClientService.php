@@ -3,9 +3,11 @@
 namespace Helldar\BlacklistCore\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
 use Helldar\BlacklistCore\Facades\Validator;
 use Illuminate\Support\Arr;
+use Psr\Http\Message\ResponseInterface;
 
 class HttpClientService
 {
@@ -35,13 +37,13 @@ class HttpClientService
         return $this;
     }
 
-    public function setBaseUri(string $url)
+    public function setBaseUri(string $value)
     {
-        Validator::validate(\compact('url'), [
-            'value' => ['required', 'active_url'],
+        Validator::validate(\compact('value'), [
+            'value' => ['required', 'string', 'active_url'],
         ]);
 
-        $this->base_uri = $url;
+        $this->base_uri = $value;
 
         return $this;
     }
@@ -71,21 +73,19 @@ class HttpClientService
      * @param string $method
      * @param array $data
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ResponseInterface
      *
-     * @return string
+     * @throws GuzzleException
      */
-    public function send(string $method, array $data)
+    public function send(string $method, array $data): ResponseInterface
     {
         return $this->client
-            ->request($method, [
-                'base_uri'    => $this->base_uri,
-                'verify'      => $this->verify,
-                'timeout'     => $this->timeout,
-                'headers'     => $this->headers,
+            ->request($method, Server::URI, [
+                'base_uri' => $this->base_uri,
+                'verify' => $this->verify,
+                'timeout' => $this->timeout,
+                'headers' => $this->headers,
                 'form_params' => $data,
-            ])
-            ->getBody()
-            ->getContents();
+            ]);
     }
 }
