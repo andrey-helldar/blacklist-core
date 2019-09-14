@@ -29,6 +29,7 @@ class Types
      * @param string|null $type
      *
      * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
+     *
      * @return bool
      */
     public static function check(string $type = null): bool

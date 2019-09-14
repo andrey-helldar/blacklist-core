@@ -73,18 +73,18 @@ class HttpClientService
      * @param string $method
      * @param array $data
      *
-     * @return ResponseInterface
-     *
      * @throws GuzzleException
+     *
+     * @return ResponseInterface
      */
     public function send(string $method, array $data): ResponseInterface
     {
         return $this->client
             ->request($method, Server::URI, [
-                'base_uri' => $this->base_uri,
-                'verify' => $this->verify,
-                'timeout' => $this->timeout,
-                'headers' => $this->headers,
+                'base_uri'    => $this->base_uri,
+                'verify'      => $this->verify,
+                'timeout'     => $this->timeout,
+                'headers'     => $this->headers,
                 'form_params' => $data,
             ]);
     }
