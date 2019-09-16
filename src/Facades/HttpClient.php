@@ -4,6 +4,7 @@ namespace Helldar\BlacklistCore\Facades;
 
 use Helldar\BlacklistCore\Services\HttpClientService;
 use Illuminate\Support\Facades\Facade;
+use Psr\Http\Message\ResponseInterface;
 
 class HttpClient extends Facade
 {
@@ -13,7 +14,7 @@ class HttpClient extends Facade
      * @method static HttpClientService setVerify($value)
      * @method static HttpClientService setHeaders($url)
      * @method static HttpClientService addHeader($url)
-     * @method static \Psr\Http\Message\ResponseInterface send($url)
+     * @method static ResponseInterface send($url)
      *
      * @return string|HttpClientService
      */

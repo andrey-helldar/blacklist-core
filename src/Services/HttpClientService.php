@@ -9,6 +9,8 @@ use Helldar\BlacklistCore\Facades\Validator;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ResponseInterface;
 
+use function compact;
+
 class HttpClientService
 {
     private $client;
@@ -28,7 +30,7 @@ class HttpClientService
 
     public function setTimeout(int $value = 0)
     {
-        Validator::validate(\compact('value'), [
+        Validator::validate(compact('value'), [
             'value' => ['required', 'integer', 'min:0', 'max:60'],
         ]);
 
@@ -39,7 +41,7 @@ class HttpClientService
 
     public function setBaseUri(string $value)
     {
-        Validator::validate(\compact('value'), [
+        Validator::validate(compact('value'), [
             'value' => ['required', 'string', 'active_url'],
         ]);
 

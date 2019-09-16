@@ -2,14 +2,14 @@
 
 namespace Helldar\BlacklistCore\Services;
 
-use function compact;
 use Helldar\BlacklistCore\Constants\Rules;
 use Helldar\BlacklistCore\Constants\Types;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\Validation\Rule;
+
+use function compact;
 
 class ValidationService
 {

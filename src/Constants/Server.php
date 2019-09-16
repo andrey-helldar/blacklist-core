@@ -6,7 +6,7 @@ class Server
 {
     const BASE_URL = 'https://blacklist.ai-rus.com';
 
-    const HEADERS  = ['Accept' => 'application/json'];
+    const HEADERS = ['Accept' => 'application/json'];
 
-    const URI      = 'api/blacklist';
+    const URI = 'api/blacklist';
 }
