@@ -2,14 +2,14 @@
 
 namespace Helldar\BlacklistCore\Services;
 
+use function compact;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
 use Helldar\BlacklistCore\Facades\Validator;
 use Illuminate\Support\Arr;
-use Psr\Http\Message\ResponseInterface;
 
-use function compact;
+use Psr\Http\Message\ResponseInterface;
 
 class HttpClientService
 {
