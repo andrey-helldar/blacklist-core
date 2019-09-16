@@ -9,19 +9,19 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-use function compact;
-
 class ValidationService
 {
-    public function validate(string $type = null, string $value = null, bool $is_require_type = true)
+    public function validate(array $data, bool $is_require_type = true)
     {
-        $this->make($type, $value, $is_require_type)
+        $this->make($data, $is_require_type)
             ->validate();
     }
 
-    public function make(string $type = null, string $value = null, bool $is_require_type = true): ValidatorContract
+    public function make(array $data, bool $is_require_type = true): ValidatorContract
     {
-        return Validator::make(compact('type', 'value'), [
+        $type = Arr::get($data, 'type');
+
+        return Validator::make($data, [
             'type'  => [
                 $is_require_type ? 'required' : 'nullable',
                 'string',
