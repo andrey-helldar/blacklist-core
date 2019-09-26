@@ -17,21 +17,32 @@ class Rules
         'ip'    => ['required', 'ip'],
     ];
 
-    const DEFAULT = ['required', 'string', 'max:255'];
+    const DEFAULT   = ['required', 'string', 'max:255'];
 
-    const MESSAGES = [
+    const MESSAGES  = [
         'value.url' => 'The :attribute is not a valid URL.',
     ];
 
-    public static function get(string $type = null): array
+    /**
+     * @param string|null $type
+     * @param bool $is_require_type
+     *
+     * @return array
+     * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
+     */
+    public static function get(string $type = null, bool $is_require_type = true): array
     {
-        if (is_null($type)) {
+        if (is_null($type) && $is_require_type) {
             throw new UnknownTypeException($type);
         }
 
-        if ($result = Arr::get(self::AVAILABLE, $type)) {
+        if (! $is_require_type) {
+            return self::DEFAULT;
+        }
+        elseif ($result = Arr::get(self::AVAILABLE, $type)) {
             return $result;
-        } else {
+        }
+        else {
             foreach (Types::get() as $key) {
                 if (Str::lower($key) === Str::lower($type)) {
                     return self::get($type);

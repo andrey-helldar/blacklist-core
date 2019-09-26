@@ -2,11 +2,14 @@
 
 namespace Helldar\BlacklistCore\Contracts;
 
+use Helldar\BlacklistServer\Models\Blacklist;
+use Illuminate\Http\Request;
+
 interface ServiceContract
 {
-    public function store(string $type, string $value);
+    public function store(Request $request): Blacklist;
 
-    public function check(string $value = null): string;
+    public function check(Request $request): void;
 
     public function exists(string $value): bool;
 }
