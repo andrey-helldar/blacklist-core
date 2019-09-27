@@ -6,8 +6,6 @@ use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-use function is_null;
-
 class Rules
 {
     const AVAILABLE = [
@@ -33,19 +31,18 @@ class Rules
      */
     public static function get(string $type = null, bool $is_require_type = true): array
     {
-        if (is_null($type) && $is_require_type) {
+        if (null === $type && $is_require_type) {
             throw new UnknownTypeException($type);
         }
 
-        if (!$is_require_type) {
+        if (! $is_require_type) {
             return self::DEFAULT;
         } elseif ($result = Arr::get(self::AVAILABLE, $type)) {
             return $result;
-        } else {
-            foreach (Types::get() as $key) {
-                if (Str::lower($key) === Str::lower($type)) {
-                    return self::get($type);
-                }
+        }
+        foreach (Types::get() as $key) {
+            if (Str::lower($key) === Str::lower($type)) {
+                return self::get($type);
             }
         }
 
