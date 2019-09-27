@@ -16,7 +16,7 @@ class HttpClient extends Facade
      * @method static HttpClientService addHeader($url)
      * @method static ResponseInterface send($url)
      *
-     * @return string|HttpClientService
+     * @return HttpClientService|string
      */
     protected static function getFacadeAccessor()
     {
