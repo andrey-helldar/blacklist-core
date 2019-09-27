@@ -27,8 +27,9 @@ class ValidationService
      * @param \Illuminate\Http\Request $request
      * @param bool $is_require_type
      *
-     * @return \Illuminate\Contracts\Validation\Validator
      * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
      */
     public function make(Request $request, bool $is_require_type = true): ValidatorContract
     {
@@ -53,8 +54,9 @@ class ValidationService
      * @param string|null $type
      * @param bool $is_require_type
      *
-     * @return array
      * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
+     *
+     * @return array
      */
     private function getValueRules(string $type = null, bool $is_require_type = true): array
     {
