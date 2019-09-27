@@ -4,7 +4,6 @@ namespace Helldar\BlacklistCore\Facades;
 
 use Helldar\BlacklistCore\Services\ValidationService;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
 
 /**
