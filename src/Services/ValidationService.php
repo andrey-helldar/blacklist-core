@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class ValidationService
 {
@@ -38,6 +39,11 @@ class ValidationService
             'type'  => $this->getTypeRules($is_require_type),
             'value' => $this->getValueRules($type, $is_require_type),
         ], Rules::MESSAGES);
+    }
+
+    public function flatten(ValidationException $exception): array
+    {
+        return Arr::flatten($exception->errors());
     }
 
     private function getTypeRules(bool $is_require_type = true): array

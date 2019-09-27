@@ -5,12 +5,13 @@ namespace Helldar\BlacklistCore\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
-use Helldar\BlacklistCore\Facades\Validator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
 
 use function compact;
+use function http_build_query;
 use function trim;
 
 class HttpClientService
@@ -34,7 +35,7 @@ class HttpClientService
 
     public function setTimeout(int $value = 0)
     {
-        Validator::validate(compact('value'), [
+        $this->validate(compact('value'), [
             'value' => ['required', 'integer', 'min:0', 'max:60'],
         ]);
 
@@ -45,8 +46,8 @@ class HttpClientService
 
     public function setBaseUri(string $value)
     {
-        Validator::validate(compact('value'), [
-            'value' => ['required', 'string', 'active_url'],
+        $this->validate(compact('value'), [
+            'value' => ['required', 'string', 'url'],
         ]);
 
         $this->base_uri = $value;
@@ -92,19 +93,35 @@ class HttpClientService
      */
     public function send(string $method, array $data): ResponseInterface
     {
-        $uri = rtrim(Server::URI, '/');
-
-        if ($this->uri_suffix) {
-            $uri .= Str::start($this->uri_suffix, '/');
-        }
+        $url = $this->getUrl($method, $data);
 
         return $this->client
-            ->request($method, $uri, [
+            ->request($method, $url, [
                 'base_uri'    => $this->base_uri,
                 'verify'      => $this->verify,
                 'timeout'     => $this->timeout,
                 'headers'     => $this->headers,
                 'form_params' => $data,
             ]);
+    }
+
+    private function validate(array $data, array $rules)
+    {
+        Validator::make($data, $rules)->validate();
+    }
+
+    private function getUrl(string $method, array $data): string
+    {
+        $uri = rtrim(Server::URI, '/');
+
+        if ($this->uri_suffix) {
+            $uri .= Str::start($this->uri_suffix, '/');
+        }
+
+        if (Str::upper($method) === 'GET') {
+            $uri .= '?' . http_build_query($data);
+        }
+
+        return $uri;
     }
 }
