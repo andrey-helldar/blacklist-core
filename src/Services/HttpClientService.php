@@ -2,26 +2,30 @@
 
 namespace Helldar\BlacklistCore\Services;
 
-use function compact;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
 use Helldar\BlacklistCore\Facades\Validator;
 use Illuminate\Support\Arr;
-
+use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
+
+use function compact;
+use function trim;
 
 class HttpClientService
 {
-    private $client;
-
     private $base_uri;
 
-    private $verify = true;
+    private $client;
+
+    private $headers = Server::HEADERS;
 
     private $timeout = 0;
 
-    private $headers = Server::HEADERS;
+    private $uri_suffix;
+
+    private $verify = true;
 
     public function __construct(Client $client)
     {
@@ -46,6 +50,13 @@ class HttpClientService
         ]);
 
         $this->base_uri = $value;
+
+        return $this;
+    }
+
+    public function setUriSuffix(string $value = null)
+    {
+        $this->uri_suffix = trim($value);
 
         return $this;
     }
@@ -75,14 +86,20 @@ class HttpClientService
      * @param string $method
      * @param array $data
      *
+     * @return ResponseInterface
      * @throws GuzzleException
      *
-     * @return ResponseInterface
      */
     public function send(string $method, array $data): ResponseInterface
     {
+        $uri = rtrim(Server::URI, '/');
+
+        if ($this->uri_suffix) {
+            $uri .= Str::start($this->uri_suffix, '/');
+        }
+
         return $this->client
-            ->request($method, Server::URI, [
+            ->request($method, $uri, [
                 'base_uri'    => $this->base_uri,
                 'verify'      => $this->verify,
                 'timeout'     => $this->timeout,

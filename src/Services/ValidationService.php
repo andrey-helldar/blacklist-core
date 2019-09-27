@@ -5,36 +5,36 @@ namespace Helldar\BlacklistCore\Services;
 use Helldar\BlacklistCore\Constants\Rules;
 use Helldar\BlacklistCore\Constants\Types;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class ValidationService
 {
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param array $data
      * @param bool $is_require_type
      *
      * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
      */
-    public function validate(Request $request, bool $is_require_type = true)
+    public function validate(array $data, bool $is_require_type = true)
     {
-        $this->make($request, $is_require_type)
+        $this->make($data, $is_require_type)
             ->validate();
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param array $data
      * @param bool $is_require_type
      *
      * @return \Illuminate\Contracts\Validation\Validator
      * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
      */
-    public function make(Request $request, bool $is_require_type = true): ValidatorContract
+    public function make(array $data, bool $is_require_type = true): ValidatorContract
     {
-        $type = $request->get('type');
+        $type = Arr::get($data, 'type');
 
-        return Validator::make($request->all(), [
+        return Validator::make($data, [
             'type'  => $this->getTypeRules($is_require_type),
             'value' => $this->getValueRules($type, $is_require_type),
         ], Rules::MESSAGES);
