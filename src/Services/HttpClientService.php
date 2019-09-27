@@ -2,16 +2,16 @@
 
 namespace Helldar\BlacklistCore\Services;
 
+use function compact;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
+use function http_build_query;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
-
-use function compact;
-use function http_build_query;
 use function trim;
 
 class HttpClientService
@@ -87,9 +87,9 @@ class HttpClientService
      * @param string $method
      * @param array $data
      *
-     * @return ResponseInterface
      * @throws GuzzleException
      *
+     * @return ResponseInterface
      */
     public function send(string $method, array $data): ResponseInterface
     {
