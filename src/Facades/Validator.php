@@ -3,16 +3,19 @@
 namespace Helldar\BlacklistCore\Facades;
 
 use Helldar\BlacklistCore\Services\ValidationService;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @method static ValidationService validate(array $data, bool $is_require_type = true)
+ * @method static ValidatorContract make(array $data, bool $is_require_type = true)
+ * @method static array flatten(ValidationException $exception)
+ *
+ * @return string
+ */
 class Validator extends Facade
 {
-    /**
-     * @method static ValidationService make(Request $request, array $rules, array $messages = [], array $customAttributes = [])
-     *
-     * @return string
-     */
     protected static function getFacadeAccessor()
     {
         return ValidationService::class;
