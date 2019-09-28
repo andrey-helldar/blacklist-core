@@ -9,13 +9,13 @@ use Illuminate\Support\Str;
 class Rules
 {
     const AVAILABLE = [
-        'email' => ['required', 'string', 'email', 'max:255'],
-        'host'  => ['required', 'string', 'url', 'max:255'],
-        'phone' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'min:7', 'max:255'],
+        'host'  => ['required', 'string', 'url', 'min:5', 'max:255'],
+        'phone' => ['required', 'string', 'min:4', 'max:255'],
         'ip'    => ['required', 'ip'],
     ];
 
-    const DEFAULT   = ['required', 'string', 'max:255'];
+    const DEFAULT   = ['required', 'string', 'min:4', 'max:255'];
 
     const MESSAGES  = [
         'value.url' => 'The :attribute is not a valid URL.',
