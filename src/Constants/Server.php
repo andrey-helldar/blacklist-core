@@ -19,11 +19,17 @@ class Server
         return [
             '127.0.0.1',
             self::host(),
+            self::configHost(),
             self::email(),
         ];
     }
 
     public static function host(): string
+    {
+        return request()->getHost();
+    }
+
+    public static function configHost(): string
     {
         return parse_url(config('app.url'), PHP_URL_HOST);
     }
