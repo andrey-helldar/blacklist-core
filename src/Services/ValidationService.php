@@ -66,6 +66,20 @@ class ValidationService
      */
     private function getValueRules(string $type = null, bool $is_require_type = true): array
     {
-        return Rules::get($type, $is_require_type);
+        $server = config('blacklist_server.except', []);
+        $client = config('blacklist_client.except', []);
+
+        $except =
+            array_values(
+                array_unique(
+                    array_merge($server, $client)
+                )
+            );
+
+        $rules = Rules::get($type, $is_require_type);
+
+        array_push($rules, Rule::notIn($except));
+
+        return array_values($rules);
     }
 }

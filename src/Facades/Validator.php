@@ -5,6 +5,7 @@ namespace Helldar\BlacklistCore\Facades;
 use Helldar\BlacklistCore\Services\ValidationService;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Validation\ValidationException;
 
 /**
  * @method static ValidationService validate(array $data, bool $is_require_type = true)
