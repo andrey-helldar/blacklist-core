@@ -2,7 +2,9 @@
 
 namespace Helldar\BlacklistCore\Rules;
 
-class ExceptBlocking
+use Illuminate\Contracts\Validation\Rule;
+
+class ExceptBlocking implements Rule
 {
     /**
      * Determine if the validation rule passes.

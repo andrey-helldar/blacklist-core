@@ -3,8 +3,9 @@
 namespace Helldar\BlacklistCore\Rules;
 
 use Helldar\BlacklistCore\Constants\Server;
+use Illuminate\Contracts\Validation\Rule;
 
-class SelfBlocking
+class SelfBlocking implements Rule
 {
     /**
      * Determine if the validation rule passes.
