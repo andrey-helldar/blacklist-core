@@ -2,7 +2,6 @@
 
 namespace Helldar\BlacklistCore\Helpers;
 
-use;
 use Dotenv\Environment\Adapter\EnvConstAdapter;
 use Dotenv\Environment\Adapter\PutenvAdapter;
 use Dotenv\Environment\Adapter\ServerConstAdapter;
