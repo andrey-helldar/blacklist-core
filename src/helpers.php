@@ -1,6 +1,6 @@
 <?php
 
-use Helldar\BlacklistClient\Helpers\Env;
+use Helldar\BlacklistCore\Helpers\Env;
 use Illuminate\Support\Env as IlluminateEnv;
 
 if (! function_exists('value')) {
