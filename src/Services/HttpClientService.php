@@ -36,6 +36,7 @@ class HttpClientService
      * @param int $value
      *
      * @throws IncorrectValueException
+     *
      * @return $this
      */
     public function setTimeout(int $value = 0)
@@ -56,6 +57,7 @@ class HttpClientService
      * @param string $value
      *
      * @throws IncorrectValueException
+     *
      * @return $this
      */
     public function setBaseUri(string $value)

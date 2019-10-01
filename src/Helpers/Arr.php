@@ -12,7 +12,7 @@ class Arr
     /**
      * @param array $array
      * @param string $key
-     * @param null|mixed $default
+     * @param mixed|null $default
      *
      * @return mixed|null
      */
