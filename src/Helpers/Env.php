@@ -76,7 +76,7 @@ class Env
     {
         return Option::fromValue(static::getVariables()->get($key))
             ->map(function ($value) {
-                switch (strtolower($value)) {
+                switch (mb_strtolower($value)) {
                     case 'true':
                     case '(true)':
                         return true;
