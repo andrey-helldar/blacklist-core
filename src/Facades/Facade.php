@@ -15,8 +15,6 @@ abstract class Facade
      */
     protected static $resolvedInstance;
 
-    abstract public static function getFacadeAccessor();
-
     /**
      * @param string $method
      * @param array $args
@@ -38,6 +36,8 @@ abstract class Facade
     {
         return static::resolveFacadeInstance(static::getFacadeAccessor());
     }
+
+    abstract protected static function getFacadeAccessor();
 
     protected static function resolveFacadeInstance($name)
     {
