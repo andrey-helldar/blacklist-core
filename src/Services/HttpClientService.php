@@ -2,16 +2,16 @@
 
 namespace Helldar\BlacklistCore\Services;
 
-use function compact;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
-use function http_build_query;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
+
+use function compact;
+use function http_build_query;
 use function trim;
 
 class HttpClientService
@@ -28,9 +28,9 @@ class HttpClientService
 
     private $verify = true;
 
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+        $this->client = new Client();
     }
 
     public function setTimeout(int $value = 0)
