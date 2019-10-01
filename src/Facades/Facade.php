@@ -15,7 +15,7 @@ abstract class Facade
      */
     protected static $resolvedInstance;
 
-    abstract static function getFacadeAccessor();
+    abstract public static function getFacadeAccessor();
 
     /**
      * @param string $method
