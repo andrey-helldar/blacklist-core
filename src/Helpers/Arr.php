@@ -3,7 +3,6 @@
 namespace Helldar\BlacklistCore\Helpers;
 
 use function is_array;
-use function is_null;
 
 class Arr
 {
@@ -33,7 +32,7 @@ class Arr
      */
     public static function wrap($value)
     {
-        if (is_null($value)) {
+        if (null === $value) {
             return [];
         }
 

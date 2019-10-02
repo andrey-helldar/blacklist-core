@@ -27,9 +27,9 @@ class Rules
      * @param string|null $type
      * @param bool $is_require_type
      *
-     * @return array
      * @throws \Helldar\BlacklistCore\Exceptions\UnknownTypeException
      *
+     * @return array
      */
     public static function get(string $type = null, bool $is_require_type = true): array
     {
@@ -39,8 +39,7 @@ class Rules
 
         if (! $is_require_type) {
             return self::attachCheckBlocking();
-        }
-        elseif ($result = Arr::get(self::AVAILABLE, $type)) {
+        } elseif ($result = Arr::get(self::AVAILABLE, $type)) {
             return self::attachCheckBlocking($result);
         }
         foreach (Types::get() as $key) {
