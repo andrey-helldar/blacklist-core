@@ -34,9 +34,9 @@ class Types
     /**
      * @param string|null $type
      *
-     * @return bool
      * @throws UnknownTypeException
      *
+     * @return bool
      */
     public static function check(string $type = null): bool
     {
