@@ -11,18 +11,18 @@ use PhpOption\Option;
 class Env
 {
     /**
-     * Indicates if the putenv adapter is enabled.
-     *
-     * @var bool
-     */
-    protected static $putenv = true;
-
-    /**
      * The environment factory instance.
      *
      * @var \Dotenv\Environment\FactoryInterface|null
      */
     protected static $factory;
+
+    /**
+     * Indicates if the putenv adapter is enabled.
+     *
+     * @var bool
+     */
+    protected static $putenv = true;
 
     /**
      * The environment variables instance.

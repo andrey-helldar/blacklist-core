@@ -2,12 +2,12 @@
 
 namespace Helldar\BlacklistCore\Constants;
 
+use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
+use Helldar\BlacklistCore\Helpers\Str;
+
 use function array_keys;
 use function array_map;
-
 use function array_pop;
-use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
-use Illuminate\Support\Str;
 use function implode;
 use function in_array;
 
@@ -34,9 +34,9 @@ class Types
     /**
      * @param string|null $type
      *
+     * @return bool
      * @throws UnknownTypeException
      *
-     * @return bool
      */
     public static function check(string $type = null): bool
     {
