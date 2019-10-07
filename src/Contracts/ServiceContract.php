@@ -4,9 +4,9 @@ namespace Helldar\BlacklistCore\Contracts;
 
 interface ServiceContract
 {
-    public function store(string $value, string $type);
+    public function store(string $value = null, string $type = null);
 
-    public function check(string $value, string $type = null);
+    public function check(string $value = null, string $type = null);
 
-    public function exists(string $value, string $type = null): bool;
+    public function exists(string $value = null, string $type = null): bool;
 }
