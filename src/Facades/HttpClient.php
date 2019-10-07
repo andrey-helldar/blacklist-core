@@ -3,7 +3,6 @@
 namespace Helldar\BlacklistCore\Facades;
 
 use Helldar\BlacklistCore\Services\HttpClientService;
-use Illuminate\Support\Facades\Facade;
 use Psr\Http\Message\ResponseInterface;
 
 /**

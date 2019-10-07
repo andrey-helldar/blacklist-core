@@ -2,16 +2,15 @@
 
 namespace Helldar\BlacklistCore\Services;
 
-use function compact;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Helldar\BlacklistCore\Constants\Server;
-use function http_build_query;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Support\Str;
+use Helldar\BlacklistCore\Exceptions\IncorrectValueException;
+use Helldar\BlacklistCore\Helpers\Arr;
+use Helldar\BlacklistCore\Helpers\Str;
 use Psr\Http\Message\ResponseInterface;
+
+use function http_build_query;
 use function trim;
 
 class HttpClientService
@@ -26,29 +25,46 @@ class HttpClientService
 
     private $uri_suffix;
 
-    private $verify = true;
+    private $verify = false;
 
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+        $this->client = new Client();
     }
 
+    /**
+     * @param int $value
+     *
+     * @throws IncorrectValueException
+     *
+     * @return $this
+     */
     public function setTimeout(int $value = 0)
     {
-        $this->validate(compact('value'), [
-            'value' => ['required', 'integer', 'min:0', 'max:60'],
-        ]);
+        $min = 0;
+        $max = 60;
+
+        if ($value < $min || $value > $max) {
+            throw new IncorrectValueException(__FILE__, __LINE__, "The setTimeout must be between {$min} and {$max}. {$value} given.");
+        }
 
         $this->timeout = $value;
 
         return $this;
     }
 
+    /**
+     * @param string $value
+     *
+     * @throws IncorrectValueException
+     *
+     * @return $this
+     */
     public function setBaseUri(string $value)
     {
-        $this->validate(compact('value'), [
-            'value' => ['required', 'string', 'url'],
-        ]);
+        if (! filter_var($value, FILTER_VALIDATE_URL)) {
+            throw new IncorrectValueException(__FILE__, __LINE__, "The setBaseUri must be a valid URL. {$value} given.");
+        }
 
         $this->base_uri = $value;
 

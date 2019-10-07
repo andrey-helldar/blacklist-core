@@ -3,7 +3,7 @@
 namespace Helldar\BlacklistCore\Exceptions;
 
 use Exception;
-use Illuminate\Support\Str;
+use Helldar\BlacklistCore\Helpers\Str;
 
 use function sprintf;
 

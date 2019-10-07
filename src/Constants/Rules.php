@@ -3,10 +3,10 @@
 namespace Helldar\BlacklistCore\Constants;
 
 use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
-use Helldar\BlacklistCore\Rules\ExceptBlocking;
-use Helldar\BlacklistCore\Rules\SelfBlocking;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Helldar\BlacklistCore\Helpers\Arr;
+use Helldar\BlacklistCore\Helpers\Str;
+use Helldar\BlacklistServer\Rules\ExceptBlocking;
+use Helldar\BlacklistServer\Rules\SelfBlocking;
 
 class Rules
 {
@@ -17,9 +17,9 @@ class Rules
         'ip'    => ['required', 'string', 'ip'],
     ];
 
-    const DEFAULT = ['required', 'string', 'min:4', 'max:255'];
+    const DEFAULT   = ['required', 'string', 'min:4', 'max:255'];
 
-    const MESSAGES = [
+    const MESSAGES  = [
         'value.url' => 'The :attribute is not a valid URL.',
     ];
 
