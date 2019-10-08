@@ -6,7 +6,7 @@ use Exception;
 
 class ExcludedBlockingDetectedException extends Exception
 {
-    public function __construct(string $type = null)
+    public function __construct()
     {
         $message = 'An attempt was made to block an excluded resource!';
 
