@@ -10,6 +10,6 @@ class ExcludedBlockingDetectedException extends Exception
     {
         $message = 'An attempt was made to block an excluded resource!';
 
-        parent::__construct($message, 400);
+        parent::__construct($message, 422);
     }
 }
