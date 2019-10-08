@@ -5,8 +5,6 @@ namespace Helldar\BlacklistCore\Constants;
 use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
 use Helldar\BlacklistCore\Helpers\Arr;
 use Helldar\BlacklistCore\Helpers\Str;
-use Helldar\BlacklistServer\Rules\ExceptBlocking;
-use Helldar\BlacklistServer\Rules\SelfBlocking;
 
 class Rules
 {
@@ -17,11 +15,11 @@ class Rules
         'ip'    => ['required', 'string', 'ip'],
     ];
 
-    const DEFAULT   = ['required', 'string', 'min:4', 'max:255'];
-
-    const MESSAGES  = [
+    const MESSAGES = [
         'value.url' => 'The :attribute is not a valid URL.',
     ];
+
+    const default = ['required', 'string', 'min:4', 'max:255'];
 
     /**
      * @param string|null $type
@@ -38,28 +36,17 @@ class Rules
         }
 
         if (! $is_require_type) {
-            return self::attachCheckBlocking();
+            return static::default;
         } elseif ($result = Arr::get(self::AVAILABLE, $type)) {
-            return self::attachCheckBlocking($result);
+            return $result;
         }
+
         foreach (Types::get() as $key) {
             if (Str::lower($key) === Str::lower($type)) {
-                return self::attachCheckBlocking(self::get($type));
+                return self::get($type);
             }
         }
 
-        return self::attachCheckBlocking();
-    }
-
-    private static function attachCheckBlocking(array $rules = null): array
-    {
-        $rules = $rules ?: self::DEFAULT;
-
-        return array_values(
-            array_merge($rules, [
-                new SelfBlocking(),
-                new ExceptBlocking(),
-            ])
-        );
+        return static::default;
     }
 }
