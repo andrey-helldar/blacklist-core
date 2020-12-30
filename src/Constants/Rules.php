@@ -8,18 +8,18 @@ use Helldar\BlacklistCore\Helpers\Str;
 
 class Rules
 {
-    const AVAILABLE = [
+    public const AVAILABLE = [
         'email' => ['required', 'string', 'email', 'min:7', 'max:255'],
         'url'   => ['required', 'string', 'url', 'min:5', 'max:255'],
         'phone' => ['required', 'string', 'min:4', 'max:255'],
         'ip'    => ['required', 'string', 'ip'],
     ];
 
-    const MESSAGES = [
+    public const MESSAGES = [
         'value.url' => 'The :attribute is not a valid URL.',
     ];
 
-    const default = ['required', 'string', 'min:4', 'max:255'];
+    public const default = ['required', 'string', 'min:4', 'max:255'];
 
     /**
      * @param string|null $type

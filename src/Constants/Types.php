@@ -2,12 +2,12 @@
 
 namespace Helldar\BlacklistCore\Constants;
 
-use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
-use Helldar\BlacklistCore\Helpers\Str;
-
 use function array_keys;
 use function array_map;
+
 use function array_pop;
+use Helldar\BlacklistCore\Exceptions\UnknownTypeException;
+use Helldar\BlacklistCore\Helpers\Str;
 use function implode;
 use function in_array;
 
@@ -23,7 +23,8 @@ class Types
         $arr = array_map(
             function ($item) {
                 return Str::lower($item);
-            }, self::get()
+            },
+            self::get()
         );
 
         $last = array_pop($arr);

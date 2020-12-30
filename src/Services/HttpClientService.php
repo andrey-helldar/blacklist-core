@@ -8,9 +8,9 @@ use Helldar\BlacklistCore\Constants\Server;
 use Helldar\BlacklistCore\Exceptions\IncorrectValueException;
 use Helldar\BlacklistCore\Helpers\Arr;
 use Helldar\BlacklistCore\Helpers\Str;
-use Psr\Http\Message\ResponseInterface;
-
 use function http_build_query;
+
+use Psr\Http\Message\ResponseInterface;
 use function trim;
 
 class HttpClientService

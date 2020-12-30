@@ -4,13 +4,13 @@ namespace Helldar\BlacklistCore\Constants;
 
 class Server
 {
-    const HEADERS          = ['Accept' => 'application/json'];
+    public const HEADERS          = ['Accept' => 'application/json'];
 
-    const ROUTE_MIDDLEWARE = 'api';
+    public const ROUTE_MIDDLEWARE = 'api';
 
-    const ROUTE_PREFIX     = 'api.blacklist.';
+    public const ROUTE_PREFIX     = 'api.blacklist.';
 
-    const URI              = 'api/blacklist';
+    public const URI              = 'api/blacklist';
 
     public static function selfValues(): array
     {
