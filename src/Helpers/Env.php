@@ -40,8 +40,8 @@ class Env
     {
         if (static::$factory === null) {
             $adapters = array_merge(
-                [new EnvConstAdapter, new ServerConstAdapter],
-                static::$putenv ? [new PutenvAdapter] : []
+                [new EnvConstAdapter(), new ServerConstAdapter()],
+                static::$putenv ? [new PutenvAdapter()] : []
             );
 
             static::$factory = new DotenvFactory($adapters);

@@ -2,9 +2,9 @@
 
 namespace Helldar\BlacklistCore\Facades;
 
-use RuntimeException;
-
 use function is_object;
+
+use RuntimeException;
 
 abstract class Facade
 {
@@ -49,6 +49,6 @@ abstract class Facade
             return static::$resolvedInstance[$name];
         }
 
-        return static::$resolvedInstance[$name] = new $name;
+        return static::$resolvedInstance[$name] = new $name();
     }
 }
